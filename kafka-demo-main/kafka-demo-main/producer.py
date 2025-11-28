@@ -1,21 +1,55 @@
-from kafka import KafkaProducer
-import json
-import time
+"""
+    Task 1 — Write a Kafka Producer
 
-producer = KafkaProducer(
-    bootstrap_servers=['localhost:9092'],
-    value_serializer=lambda v: json.dumps(v).encode('utf-8')
-)
+Create a producer that:
+        •	Connects to localhost:9092
+        •	Sends JSON messages every 1 second
+        •	Each message must contain:
+ {"id": <int>, "timestamp": <unix_ms>, "value": "<random_string>"}
 
-print("Sending messages...")
+ Sends messages to topic: lab-events
 
-count = 0
+ Requirements:
+        •	Use KafkaProducer
+        •	Use a JSON serializer
+        •	Print each message before sending
+        •	Stop gracefully on KeyboardInterrupt
+
+"""
+
+
+import random
+import string
+
+
+def random_string(length=6):
+    return "".join(random.choice(string.ascii_lowercase) for _ in range(length))
+
+
+# TODO: Create a KafkaProducer connected to localhost:9092 (Use a JSON serializer for the value)
+
+
+# TODO: Inform that the producer has started and which topic we're sending to
+print()
+msg_id = 0
+
 try:
     while True:
-        message = {'id': count, 'data': f'Message {count}'}
-        producer.send('quickstart-events', value=message)
-        print(f"Sent: {message}")
-        count += 1
-        time.sleep(2)
+        # TODO: Create a message dict with keys: id, timestamp (unix ms), value (random string)
+        
+
+        # TODO: Send the message to the 'lab-events' topic using producer.send(...)
+        
+
+        # TODO: Print (or log) each message before or after sending
+        print("Sent:", )
+
+        msg_id += 1
+
+        # TODO: Wait 1 second between messages
+        
+
 except KeyboardInterrupt:
-    producer.close()
+    # TODO: Close the producer and stop gracefully
+    print("\nStopping producer...")
+    
